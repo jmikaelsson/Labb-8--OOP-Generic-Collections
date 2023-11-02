@@ -9,14 +9,17 @@ namespace Labb_8__OOP_Generic_Collections
 {
     internal class Employee
     {
-        public int Id;
-        public string Name;
-        public string Gender;
-        public double Salary;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Gender { get; set; }
+        public double Salary { get; set; }
 
-        public Employee(int id, string name, string gender, double salary)
+        public static int RefernsId = 10001;
+
+
+        public Employee(string name, string gender, double salary)
         {
-            Id = id;
+            Id = RefernsId;
             Name = name;
             Gender = gender;
             Salary = salary;
