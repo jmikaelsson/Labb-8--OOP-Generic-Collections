@@ -19,7 +19,7 @@ namespace Labb_8__OOP_Generic_Collections
 
         public Employee(string name, string gender, double salary)
         {
-            Id = RefernsId;
+            Id = RefernsId++;
             Name = name;
             Gender = gender;
             Salary = salary;
