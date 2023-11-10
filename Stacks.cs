@@ -12,6 +12,7 @@ namespace Labb_8__OOP_Generic_Collections
       public static void StackMethod()
         {
             Stack<Employee> employees = new();
+            Stack<Employee> employeeBackUp = new();
 
             bool startPage = true;
             while (startPage)
@@ -116,10 +117,23 @@ namespace Labb_8__OOP_Generic_Collections
                 }
             }
 
+
+            static void CopyEmployees(Stack<Employee> employees)
+        {
+            if (employees.Count > 0)
+            {
+                
+                foreach (var employee in employees)
+                {
+                    employees.Peek();
+                    employeeBackUp.Clone(employee);
+                }
+            }
+        }
             static void RemoveEmployee(Stack<Employee> employees)
             {
 
-                //<Stacks>employeeBackUp = employees;
+                
                 while (employees.Count > 0)
                 {
                     employees.Pop();

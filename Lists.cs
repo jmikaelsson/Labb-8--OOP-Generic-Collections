@@ -115,6 +115,8 @@ namespace Labb_8__OOP_Generic_Collections
                 }
             }
 
+        static void CopyEmployees()
+
             static void RemoveEmployee(List<Employee> employees)
             {
 
