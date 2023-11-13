@@ -27,7 +27,7 @@ namespace Labb_8__OOP_Generic_Collections
 
         public void PrintInfo()
         {
-            Console.WriteLine($"Namn: {Name}"+$"\nKön: {Gender}"+$"\nLön: {Salary}"+$"\nAnställningsnummer: {Id}");
+            Console.WriteLine($"Namn: {Name}"+$"\nKön: {Gender}"+$"\nLön: {Salary}"+$"\nAnställningsnummer: {Id}\n");
         }
 
     }

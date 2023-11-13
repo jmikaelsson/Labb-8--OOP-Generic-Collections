@@ -1,5 +1,6 @@
 ﻿using Labb_8__OOP_Generic_Collections;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Labb_8__OOP_Generic_Collections
 {
-    internal class Stacks
+    internal static class Stacks
     {
-      public static void StackMethod()
+        public static void StackMethod()
         {
             Stack<Employee> employees = new();
             Stack<Employee> employeeBackUp = new();
@@ -36,8 +37,6 @@ namespace Labb_8__OOP_Generic_Collections
                         Console.Clear();
                         NewEmployee(employees);
                     }
-
-
                     else if (userInput == 2)
                     {
                         Console.Clear();
@@ -48,7 +47,7 @@ namespace Labb_8__OOP_Generic_Collections
                         Console.Clear();
                         RemoveEmployee(employees);
                     }
-                    }
+
                     else if (userInput == 4)
                     {
                         Console.Clear();
@@ -59,126 +58,144 @@ namespace Labb_8__OOP_Generic_Collections
                         Console.Clear();
                         startPage = false;
                     }
-                    else
-                    {
-                        Console.WriteLine("Du måste göra ett val, 1,2, 3 eller 4[exit]");
-                    }
-                }
-            }
-                                
-            static void NewEmployee(Stack<Employee> employees)
-            {
-                Console.WriteLine("Lägg till ny anställd\n-----------------------");
-
-                Console.Write("Namn: ");
-                string userInputName = Console.ReadLine();
-                Console.Write("Kön: ");
-                string userInputGender = Console.ReadLine();
-                Console.Write("Månadslön: ");
-                bool wrongInput = !double.TryParse(Console.ReadLine(), out double userInputSalary);
-                while (wrongInput)
-                {
-                    Console.WriteLine("Fel format. Endast siffror\n");
-                    Console.Write("Lön: ");
-                    wrongInput = !double.TryParse(Console.ReadLine(), out userInputSalary);
-                }
-
-                Employee newEmployee = new Employee(userInputName, userInputGender, userInputSalary);
-
-                Console.WriteLine("-----------------------\nSammanfattning\n");
-                newEmployee.PrintInfo();
-
-                Console.WriteLine("" +
-                    "\nTryck enter för att lägga till anställd");
-                Console.ReadKey();
-                employees.Push(newEmployee);
-                Console.Clear();
-            }
-
-            static void AllEmployee(Stack<Employee> employees)
-            {
-
-
-                if (employees.Count > 0)
-                {
-                    foreach (var employee in employees)
-                    {
-                        employee.PrintInfo();
-                        Console.WriteLine($"---------------------------\nTotalt antal anställda: {employees.Count()}\n");
-                    }
-                    Console.ReadKey();
-                    Console.Clear();
                 }
                 else
                 {
-                    Console.WriteLine("Det finns inga anställda att vissa...");
-                    Console.ReadKey();
-                    Console.Clear();
-                }
-            }
-
-
-            static void CopyEmployees(Stack<Employee> employees)
-        {
-            if (employees.Count > 0)
-            {
-                
-                foreach (var employee in employees)
-                {
-                    employees.Peek();
-                    employeeBackUp.Clone(employee);
+                    Console.WriteLine("Du måste göra ett val, 1,2, 3 eller 4[exit]");
                 }
             }
         }
-            static void RemoveEmployee(Stack<Employee> employees)
-            {
 
-                
-                while (employees.Count > 0)
+        static void NewEmployee(Stack<Employee> employees)
+        {
+            Console.WriteLine("Lägg till ny anställd\n-----------------------");
+
+            Console.Write("Namn: ");
+            string userInputName = Console.ReadLine();
+            Console.Write("Kön: ");
+            string userInputGender = Console.ReadLine();
+            Console.Write("Månadslön: ");
+            bool wrongInput = !double.TryParse(Console.ReadLine(), out double userInputSalary);
+            while (wrongInput)
+            {
+                Console.WriteLine("Fel format. Endast siffror\n");
+                Console.Write("Lön: ");
+                wrongInput = !double.TryParse(Console.ReadLine(), out userInputSalary);
+            }
+
+            Employee newEmployee = new Employee(userInputName, userInputGender, userInputSalary);
+
+            Console.WriteLine("-----------------------\nSammanfattning\n");
+            newEmployee.PrintInfo();
+
+            Console.WriteLine("" +
+                "\nTryck enter för att lägga till anställd");
+            Console.ReadKey();
+            employees.Push(newEmployee);
+            Console.Clear();
+        }
+
+        static void AllEmployee(Stack<Employee> employees)
+        {
+
+            if (employees.Count > 0)
+            {
+                foreach (var employee in employees)
                 {
-                    employees.Pop();
-                    Console.WriteLine("Antal anställda: " + employees.Count);
+                    employee.PrintInfo();
+                    Console.WriteLine($"---------------------------\nTotalt antal anställda: {employees.Count()}\n");
                 }
-                Console.WriteLine("Alla anställda borttagna..\n\n[1] Ångra borttagning\nTryck Enter för att gå tillbaka");
-                bool succses = int.TryParse(Console.ReadLine(), out int reverseRemove);
-                while (succses)
-                {
-                    if (reverseRemove == 1)
-                    {
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else
+            {
+                Console.WriteLine("Det finns inga anställda att vissa...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+        }
+
+
+        static void CopyEmployees(Stack<Employee> stackA, Stack<Employee> StackB)
+        {
+            if(StackB.Count > 0)
+            {
+                StackB.Clear();
+            }
+
+
+            foreach (Employee employee in stackA)
+            {
+                StackB.Push(employee);
+            }
+
+        }
+        static void RemoveEmployee(Stack<Employee> employees)
+        {
+            
+            if (employees is null || employees.Count <= 0)
+            {
+                return;
+            }
+
+            Stack<Employee> employeeBackUp = new();
+            CopyEmployees(employees, employeeBackUp);
+
+
+            while (employees.Count > 0)
+            {
+                var employee = employees.Pop();
+                Console.WriteLine("Antal anställda: " + employees.Count);
+            }
+            Console.WriteLine("Alla anställda borttagna..\n\n[1] Ångra borttagning\n[2] för att gå tillbaka");
+            string userChoise = Console.ReadLine();
+            switch (userChoise)
+            {
+                case "1":
                         Console.Clear();
-                        //employees.Push(employeeBackUp);
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("Tryck 1 för att ångra");
-                    }
-                }
+                        CopyEmployees(employeeBackUp, employees);
+                    break;
+                default:
+                    Console.Clear();
+                    break;
             }
+        }
 
-            static void SeekEmployee(Stack<Employee> employees)
+        static void SeekEmployee(Stack<Employee> employees)
+        {
+            Console.WriteLine("Sök medarbetare" +
+
+                "------------------------");
+            Console.Write("Namn: ");
+            string name = Console.ReadLine();
+            Employee foundEmployee = employees.FirstOrDefault(employee => employee.Name == name);
+            //if (foundEmployee is not null)
+            //{
+            //    Console.WriteLine("------------------------");
+            //    foundEmployee.PrintInfo();
+            //}
+            //else
+            //{
+            //    Console.WriteLine("------------------------");
+            //    Console.WriteLine($"Det finns ingen med {name} i registret");
+            //}
+            bool stackContain = employees.Contains(foundEmployee);
+            if (stackContain)
             {
-                Console.WriteLine("Sök medarbetare" +
-
-                    "------------------------");
-                Console.Write("Namn: ");
-                string name = Console.ReadLine();
-                string gender = Console.ReadLine();
-                bool succses = double.TryParse(Console.ReadLine(), out double salary);
-                if (succses)
-                {
-                    //Console.WriteLine(employees.Contains(name));
-                }
-                else
-                {
-                    Console.WriteLine("Fel inskrivet");
-                }
-
-
-
-
-
+                Console.WriteLine("------------------------");
+                foundEmployee.PrintInfo();
             }
-    
-}
+            else
+            {
+                Console.WriteLine("------------------------");
+                Console.WriteLine($"Det finns ingen med {name} i registret");
+            }
+            
+            Console.WriteLine("Tryck enter för att gå tillbaka");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+    }
 }

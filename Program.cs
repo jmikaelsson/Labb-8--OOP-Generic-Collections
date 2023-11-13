@@ -22,10 +22,12 @@ namespace Labb_8__OOP_Generic_Collections
                 {
                     if (userInput == 1)
                     {
+                        Console.Clear();
                         Stacks.StackMethod();
                     }
                     else if (userInput == 2)
                     {
+                        Console.Clear();
                         Lists.ListMethod();
                     }
                     else
